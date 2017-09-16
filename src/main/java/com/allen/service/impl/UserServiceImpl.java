@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	private RoleMapper roleMapper;
 
 	@Override
-	public BootstrapTableResult<UserVo> findRoleByPagination(int offset, int limit, User user) {
+	public BootstrapTableResult<UserVo> findUserByPagination(int offset, int limit, User user) {
 		PageHelper.startPage((offset / limit) + 1, limit);
 
 		// 条件设置
@@ -62,7 +62,11 @@ public class UserServiceImpl implements UserService {
 
 			// 角色关联的角色名称，角色信息启用了 mybatis 的缓存，无需通过关联查询，从数据库取，提升性能
 			Role role = roleMapper.selectByPrimaryKey(vo.getRoleId());
-			vo.setRole(role);
+			if (role != null) {
+				vo.setRole(role);
+			} else {
+				vo.setRole(new Role());
+			}
 		}
 
 		PageInfo<UserVo> pageInfo = new PageInfo<>(list);
@@ -74,13 +78,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Role findRoleById(int roleId) {
-		return null;
+	public User findUserById(int userId) {
+		return userMapper.selectByPrimaryKey(userId);
 	}
 
 	@Override
-	public int deleteRoleById(int roleId) {
-		return 0;
+	public int deleteUserById(int userId) {
+		return userMapper.deleteByPrimaryKey(userId);
 	}
 
 	@Override
@@ -96,7 +100,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int editRoleById(Role role) {
-		return 0;
+	public int editUserById(User user) {
+		// 密码 md5 加密
+		user.setPassword(DigestUtils.md5Hex(user.getPassword().getBytes()));
+		return userMapper.updateByPrimaryKeySelective(user);
 	}
 }

@@ -25,7 +25,7 @@
 </head>
 
 <body class="gray-bg">
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content">
 
     <!-- Panel Other -->
     <div class="ibox float-e-margins">
@@ -52,6 +52,9 @@
                                 </button>
                                 <button type="button" class="btn btn-outline btn-default" id="del">
                                     <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>删除
+                                </button>
+                                <button type="button" class="btn btn-outline btn-default" id="permission-set">
+                                    <i class="glyphicon glyphicon-filter" aria-hidden="true"></i>权限设置
                                 </button>
 
 

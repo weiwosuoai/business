@@ -11,14 +11,14 @@ import com.allen.pojo.vo.UserVo;
  */
 public interface UserService {
 
-	BootstrapTableResult<UserVo> findRoleByPagination(int offset, int limit, User user);
+	BootstrapTableResult<UserVo> findUserByPagination(int offset, int limit, User user);
 
-	Role findRoleById(int roleId);
+	User findUserById(int userId);
 
-	int deleteRoleById(int roleId);
+	int deleteUserById(int userId);
 
 	int addUser(User user);
 
-	int editRoleById(Role role);
+	int editUserById(User user);
 
 }

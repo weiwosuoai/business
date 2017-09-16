@@ -23,7 +23,7 @@
 </head>
 
 <body class="gray-bg">
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
             <h5>查询条件</h5>
@@ -116,8 +116,10 @@
         pageList: [10, 25, 50],
         showRefresh: true,
         smartDisplay: false,
+        singleSelect : true, // 单选checkbox
         clickToSelect: true,
         uniqueId: 'id',
+        method: 'get',
         url: '/sys/user/manage/list/data',
         dataType: 'json',
         sidePagination: 'server',
@@ -146,7 +148,7 @@
             field: 'role.roleName',
             title: '角色'
         }, {
-            field: 'createTimeStr',
+            field: 'createTime',
             title: '创建时间'
         }]
     });
@@ -184,6 +186,72 @@
                 $("#layer_status").val(-1);
             }
         });
+    });
+
+    // 编辑
+    $('#edit').click(function(){
+        var a= $('#table').bootstrapTable('getSelections');
+        if (a.length == 1) {
+            var id = a[0].id;
+            layer.open({
+                type: 2,
+                title: '编辑',
+                shadeClose: true,
+                shade: false,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['800px', '500px'],
+                content: "<%=context%>/sys/user/manage/" + id + "/edit/view",
+                end: function() {
+                    // iframe 层提交表单返回的状态码
+                    var status = $("#layer_status").val();
+                    // iframe 层提交表单返回的服务器响应的消息
+                    var msg = $("#layer_msg").val();
+                    if (status == 0) {
+                        layer.msg(msg, {icon: 1});
+                        // 刷新列表
+                        $("#table").bootstrapTable('refresh');
+                    } else if (status == 1) {
+                        layer.msg(msg, {icon: 2});
+                    }
+                    // 状态码恢复默认值
+                    $("#layer_status").val(-1);
+                }
+            });
+        } else {
+            //提示层
+            layer.msg("请选择一条记录！");
+        }
+    });
+
+    // 删除
+    $('#del').click(function(){
+        var a= $('#table').bootstrapTable('getSelections');
+        if (a.length == 1) {
+            // 提示是否确定删除
+            layer.confirm('是否确定要删除这条记录？', {
+                icon: 7, title:'提示', btn: ['确定','取消'] //按钮
+            }, function(){
+                var id = a[0].id;
+                // ajax 异步删除角色
+                $.ajax({
+                    type: "POST",
+                    async: true,
+                    url: "<%=context%>/sys/user/manage/" + id + "/delete",
+                    success: function (data) {
+                        var jsonData = $.parseJSON(JSON.stringify(data));
+                        layer.msg(jsonData.msg);
+
+                        // 刷新列表
+                        $("#table").bootstrapTable('refresh');
+                    }
+                });
+            }, function(){
+                layer.closeAll();
+            });
+        } else {
+            //提示层
+            layer.msg("请选择一条记录！");
+        }
     });
 
 

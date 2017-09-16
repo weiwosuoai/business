@@ -13,14 +13,14 @@
     <title>后台管理系统</title>
     <link href="<%=context%>/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="<%=context%>/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-    <link href="<%=context%>/css/animate.min.css" rel="stylesheet">
+    <%--<link href="<%=context%>/css/animate.min.css" rel="stylesheet">--%>
     <link href="<%=context%>/css/style.min.css?v=4.1.0" rel="stylesheet">
     <link href="<%=context%>/css/common.css" rel="stylesheet">
 
 </head>
 
 <body class="gray-bg">
-<div class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content">
 
     <div class="ibox float-e-margins">
         <%--<div class="ibox-title">--%>

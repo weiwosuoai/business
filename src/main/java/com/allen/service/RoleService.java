@@ -23,4 +23,6 @@ public interface RoleService {
 
 	int editRoleById(Role role);
 
+	boolean permissionset(RoleVo roleVo);
+
 }

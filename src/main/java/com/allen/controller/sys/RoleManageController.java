@@ -1,9 +1,12 @@
 package com.allen.controller.sys;
 
 import com.allen.common.pojo.BootstrapTableResult;
+import com.allen.common.pojo.JsTreeNode;
 import com.allen.common.pojo.ServerResponse;
+import com.allen.pojo.Menu;
 import com.allen.pojo.Role;
 import com.allen.pojo.vo.RoleVo;
+import com.allen.service.MenuService;
 import com.allen.service.RoleService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 角色管理
@@ -25,6 +31,8 @@ public class RoleManageController {
 
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private MenuService menuService;
 	/**
 	 * 展示角色管理页面
 	 * @return
@@ -106,6 +114,44 @@ public class RoleManageController {
 			return ServerResponse.createBySuccessMessage("编辑成功");
 		} else {
 			return ServerResponse.createByErrorMessage("编辑失败");
+		}
+	}
+
+	/**
+	 * 角色权限设置视图
+	 * @return
+	 */
+	@RequestMapping("/manage/{roleId}/permissionset/view")
+	public String showRolePermissionsetView(@PathVariable int roleId, Model model) {
+		model.addAttribute("roleId", roleId);
+		return "/sys/role-manage-permissionset";
+	}
+
+	/**
+	 * 角色权限设置 jstree json 数据
+	 * @return
+	 */
+	@RequestMapping("/manage/permissionset/tree")
+	@ResponseBody
+	public List<JsTreeNode> getPermissionsetTreeJson(int roleId, String id) {
+		return menuService.findPermissionsetByRoleId(roleId);
+	}
+
+	/**
+	 * 角色权限设置
+	 * @return
+	 */
+	@RequestMapping("/manage/permissionset/update")
+	@ResponseBody
+	public ServerResponse rolePermissionset(int roleId, String menuIds) {
+		RoleVo roleVo = new RoleVo();
+		roleVo.setRoleId(roleId);
+		roleVo.setMenuIds(menuIds);
+		boolean isSuccess = roleService.permissionset(roleVo);
+		if (isSuccess) {
+			return ServerResponse.createBySuccessMessage("权限设置成功");
+		} else {
+			return ServerResponse.createByErrorMessage("权限设置失败");
 		}
 	}
 }

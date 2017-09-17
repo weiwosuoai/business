@@ -62,23 +62,39 @@
                             <li>
                                 <a class="J_menuItem" href="index_v1.html" data-index="0">主页示例一</a>
                             </li>
-                            <li>
-                                <a class="J_menuItem" href="index_v2.html">主页示例二</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="index_v3.html">主页示例三</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="index_v4.html">主页示例四</a>
-                            </li>
-                            <li>
-                                <a href="index_v5.html" target="_blank">主页示例五</a>
-                            </li>
+
                         </ul>
 
                     </li>
-                   
-                    
+
+                    <li>
+                        <a href="#"><i class="fa fa-group"></i> <span class="nav-label">企业登记</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="#">企业设立</a></li>
+                            <li><a class="J_menuItem" href="#">企业变更</a></li>
+                            <li><a class="J_menuItem" href="#">企业注销</a></li>
+                            <li><a class="J_menuItem" href="#">特殊类服务</a></li>
+                        </ul>
+                    </li>
+
+
+
+                    <li>
+                        <a href="#"><i class="fa fa-credit-card"></i> <span class="nav-label">订单查询</span><span class="fa arrow"></span></a>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-gavel"></i> <span class="nav-label">证照交易</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="#">公司出售</a></li>
+                            <li><a class="J_menuItem" href="#">公司求购</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#"><i class="fa fa-commenting"></i> <span class="nav-label">在线留言</span><span class="fa arrow"></span></a>
+                    </li>
+
                     <li>
                         <a href="#"><i class="fa fa-table"></i> <span class="nav-label">系统管理</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -87,6 +103,9 @@
                             <!-- <li><a class="J_menuItem" href="table_data_tables.html">菜单管理</a> -->
                             </li>
                             <li><a class="J_menuItem" href="<%=context%>/sys/role/manage/list">角色管理</a>
+                            </li>
+
+                            <li><a class="J_menuItem" href="<%=context%>/sys/role/manage/list">短信收发</a>
                             </li>
                             
                         </ul>

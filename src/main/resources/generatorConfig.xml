@@ -46,7 +46,9 @@
 
 
 		<!--<table schema="" tableName="t_role" domainObjectName="Role"></table>-->
-		<table schema="" tableName="t_user" domainObjectName="User"></table>
+		<!--<table schema="" tableName="t_user" domainObjectName="User"></table>-->
+		<!--<table schema="" tableName="t_menu" domainObjectName="Menu"></table>-->
+		<table schema="" tableName="t_role_menu_rel" domainObjectName="RoleMenuRel"></table>
 
 
     </context>

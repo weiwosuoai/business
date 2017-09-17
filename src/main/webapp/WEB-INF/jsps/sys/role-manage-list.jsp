@@ -104,8 +104,6 @@
             var params = {
                 offset: params.offset,   //数据起始
                 limit: params.limit  //偏移量
-//                departmentname: $("#txt_search_departmentname").val(),
-//                statu: $("#txt_search_statu").val()
             };
             return params;
         },
@@ -213,6 +211,41 @@
                 });
             }, function(){
                 layer.closeAll();
+            });
+        } else {
+            //提示层
+            layer.msg("请选择一条记录！");
+        }
+    });
+
+    // 权限设置
+    $('#permission-set').click(function(){
+        var a= $('#table').bootstrapTable('getSelections');
+        if (a.length == 1) {
+            var id = a[0].roleId;
+            layer.open({
+                type: 2,
+                title: '权限设置',
+                shadeClose: true,
+                shade: false,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['800px', '450px'],
+                content: "<%=context%>/sys/role/manage/" + id + "/permissionset/view",
+                end: function() {
+                    // iframe 层提交表单返回的状态码
+                    var status = $("#layer_status").val();
+                    // iframe 层提交表单返回的服务器响应的消息
+                    var msg = $("#layer_msg").val();
+                    if (status == 0) {
+                        layer.msg(msg, {icon: 1});
+                        // 刷新列表
+                        $("#table").bootstrapTable('refresh');
+                    } else if (status == 1) {
+                        layer.msg(msg, {icon: 2});
+                    }
+                    // 状态码恢复默认值
+                    $("#layer_status").val(-1);
+                }
             });
         } else {
             //提示层
